@@ -8,6 +8,8 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { useSession } from "next-auth/react";
+import NavbarAccountDropdown from "../navbarAccountDropdown";
 
 const navigation = {
   categories: [
@@ -192,6 +194,7 @@ const navigation = {
 };
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const { data: session } = useSession();
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -340,24 +343,32 @@ function Navbar() {
                     ))}
                   </div>
 
-                  <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+                  {!session ? (
+                    <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+                      <div className="flow-root">
+                        <a
+                          href="/login"
+                          className="-m-2 block p-2 font-medium text-gray-900"
+                        >
+                          Sign in
+                        </a>
+                      </div>
+                      <div className="flow-root">
+                        <a
+                          href="/register"
+                          className="-m-2 block p-2 font-medium text-gray-900"
+                        >
+                          Create account
+                        </a>
+                      </div>
+                    </div>
+                  ) : (
                     <div className="flow-root">
-                      <a
-                        href="#"
-                        className="-m-2 block p-2 font-medium text-gray-900"
-                      >
-                        Sign in
+                      <a className="-m-2 block p-2 font-medium text-gray-900">
+                        Welcome, {session?.user?.name}
                       </a>
                     </div>
-                    <div className="flow-root">
-                      <a
-                        href="#"
-                        className="-m-2 block p-2 font-medium text-gray-900"
-                      >
-                        Create account
-                      </a>
-                    </div>
-                  </div>
+                  )}
 
                   <div className="border-t border-gray-200 px-4 py-6">
                     <a href="#" className="-m-2 flex items-center p-2">
@@ -533,21 +544,32 @@ function Navbar() {
                 </Popover.Group>
 
                 <div className="ml-auto flex items-center">
-                  <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                    <a
-                      href="#"
-                      className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      Sign in
-                    </a>
-                    <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                    <a
-                      href="#"
-                      className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      Create account
-                    </a>
-                  </div>
+                  {!session ? (
+                    <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                      <a
+                        href="/login"
+                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                      >
+                        Sign in
+                      </a>
+                      <span
+                        className="h-6 w-px bg-gray-200"
+                        aria-hidden="true"
+                      />
+                      <a
+                        href="/register"
+                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                      >
+                        Create account
+                      </a>
+                    </div>
+                  ) : (
+                    <div className="flow-root">
+                      <a className="-m-2 block p-2 font-medium text-gray-900">
+                        Welcome, {session?.user?.name}
+                      </a>
+                    </div>
+                  )}
 
                   <div className="hidden lg:ml-8 lg:flex">
                     <a
@@ -579,9 +601,9 @@ function Navbar() {
                         stroke="currentColor"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                         />
                       </svg>
@@ -601,9 +623,9 @@ function Navbar() {
                         stroke="currentColor"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                         />
                       </svg>
@@ -614,27 +636,13 @@ function Navbar() {
                     </a>
                   </div>
 
-                  <div className="hidden lg:ml-8 lg:flex">
-                    <a
-                      href="#"
-                      className="flex items-center text-gray-700 hover:text-gray-800"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </a>
-                  </div>
+                  {session ? (
+                    <div className="hidden lg:ml-8 lg:flex">
+                      <a className="flex items-center text-gray-700 hover:text-gray-800">
+                        <NavbarAccountDropdown />
+                      </a>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
