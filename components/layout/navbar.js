@@ -201,7 +201,7 @@ function Navbar() {
   }
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-white dark:bg-gray-900">
         {/* Mobile menu */}
         <Transition.Root show={open} as={Fragment}>
           <Dialog
@@ -253,7 +253,7 @@ function Navbar() {
                             className={({ selected }) =>
                               classNames(
                                 selected
-                                  ? "border-indigo-600 text-indigo-600"
+                                  ? "border-[#663399] text-[#663399]"
                                   : "border-transparent text-gray-900",
                                 "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium"
                               )
@@ -389,12 +389,12 @@ function Navbar() {
           </Dialog>
         </Transition.Root>
 
-        <header className="relative bg-white">
+        <header className="relative bg-white dark:bg-gray-900">
           <nav
             aria-label="Top"
-            className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+            className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border-b border-gray-200 dark:border-gray-700"
           >
-            <div className="border-b border-gray-200">
+            <div className="">
               <div className="flex h-16 items-center">
                 <button
                   type="button"
@@ -407,7 +407,7 @@ function Navbar() {
 
                 {/* Logo */}
                 <div className="ml-4 flex lg:ml-0">
-                  <a href="#">
+                  <a href="/">
                     <span className="sr-only">HamroCloset</span>
                     <Image
                       src="/images/logo.png"
@@ -430,8 +430,8 @@ function Navbar() {
                               <Popover.Button
                                 className={classNames(
                                   open
-                                    ? "outline-0 border-indigo-600 text-indigo-600"
-                                    : "border-transparent text-gray-700 hover:text-gray-800",
+                                    ? "outline-0 border-[#663399] text-[#663399]"
+                                    : "border-transparent text-gray-700 hover:text-gray-800 dark:text-slate-200 dark:hover:text-slate-400",
                                   "relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out outline-0"
                                 )}
                               >
@@ -448,14 +448,14 @@ function Navbar() {
                               leaveFrom="opacity-100"
                               leaveTo="opacity-0"
                             >
-                              <Popover.Panel className="absolute inset-x-0 top-full text-sm text-gray-500">
+                              <Popover.Panel className="absolute z-40 inset-x-0 top-full text-sm text-gray-500">
                                 {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                                 <div
-                                  className="absolute inset-0 top-1/2 bg-white shadow"
+                                  className="absolute  inset-0 top-1/2 bg-white shadow"
                                   aria-hidden="true"
                                 />
 
-                                <div className="relative bg-white">
+                                <div className="relative bg-white dark:bg-gray-800">
                                   <div className="mx-auto max-w-7xl px-8">
                                     <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
                                       <div className="col-start-2 grid grid-cols-2 gap-x-8">
@@ -473,7 +473,7 @@ function Navbar() {
                                             </div>
                                             <a
                                               href={item.href}
-                                              className="mt-6 block font-medium text-gray-900"
+                                              className="mt-6 block font-medium text-gray-900 dark:text-slate-200 dark:hover:text-slate-400"
                                             >
                                               <span
                                                 className="absolute inset-0 z-10"
@@ -495,7 +495,7 @@ function Navbar() {
                                           <div key={section.name}>
                                             <p
                                               id={`${section.name}-heading`}
-                                              className="font-medium text-gray-900"
+                                              className="font-medium text-gray-900 dark:text-slate-200"
                                             >
                                               {section.name}
                                             </p>
@@ -511,7 +511,7 @@ function Navbar() {
                                                 >
                                                   <a
                                                     href={item.href}
-                                                    className="hover:text-gray-800"
+                                                    className="hover:text-gray-800 dark:text-slate-200 dark:hover:text-slate-400"
                                                   >
                                                     {item.name}
                                                   </a>
@@ -535,7 +535,7 @@ function Navbar() {
                       <a
                         key={page.name}
                         href={page.href}
-                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800 dark:text-slate-200 dark:hover:text-slate-400"
                       >
                         {page.name}
                       </a>
@@ -548,7 +548,7 @@ function Navbar() {
                     <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                       <a
                         href="/login"
-                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                        className="text-sm font-medium text-gray-700 hover:text-gray-800 dark:text-slate-200 dark:hover:text-slate-400"
                       >
                         Sign in
                       </a>
@@ -558,14 +558,14 @@ function Navbar() {
                       />
                       <a
                         href="/register"
-                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                        className="text-sm font-medium text-gray-700 hover:text-gray-800 dark:text-slate-200 dark:hover:text-slate-400"
                       >
                         Create account
                       </a>
                     </div>
                   ) : (
                     <div className="flow-root">
-                      <a className="-m-2 block p-2 font-medium text-gray-900">
+                      <a className="-m-2 block p-2 font-medium text-gray-900 dark:text-slate-200 dark:hover:text-slate-400">
                         Welcome, {session?.user?.name}
                       </a>
                     </div>
@@ -574,7 +574,7 @@ function Navbar() {
                   <div className="hidden lg:ml-8 lg:flex">
                     <a
                       href="#"
-                      className="flex items-center text-gray-700 hover:text-gray-800"
+                      className="flex items-center text-gray-700 hover:text-gray-800 dark:text-slate-200 dark:hover:text-slate-400"
                     >
                       <img
                         src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Flag_of_Nepal.svg"
@@ -591,7 +591,7 @@ function Navbar() {
                   <div className="hidden lg:ml-8 lg:flex">
                     <a
                       href="#"
-                      className="flex items-center text-gray-700 hover:text-gray-800"
+                      className="flex items-center text-gray-700 hover:text-gray-800 dark:text-slate-200 dark:hover:text-slate-400"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -613,7 +613,7 @@ function Navbar() {
                   <div className="hidden lg:ml-8 lg:flex">
                     <a
                       href="#"
-                      className="flex items-center text-gray-700 hover:text-gray-800"
+                      className="flex items-center text-gray-700 hover:text-gray-800 dark:text-slate-200 dark:hover:text-slate-400 "
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

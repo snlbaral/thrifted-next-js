@@ -10,12 +10,13 @@ export const authOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      clientId:
+        "882234483028-jlmdem97hhcgjuat499bcg9a8tv23o03.apps.googleusercontent.com",
+      clientSecret: "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",
     }),
     FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      clientId: "960452744964253",
+      clientSecret: "99373c3fd4dbddaa949ec88b9ca43c2a",
     }),
     CredentialsProvider({
       name: "credentials",
